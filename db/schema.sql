@@ -1,7 +1,7 @@
 --Drops database in case of TEST --
 DROP DATABASE IF EXISTS employees_db;
 -- Creates the "employee_db" database --
-CREATE DATABASE employess_db;
+CREATE DATABASE employees_db;
 
 -- Selects the "employees_db database" --
 USE employees_db;
@@ -24,7 +24,7 @@ CREATE TABLE roles (
     ON DELETE SET NULL
 );
 
--- Creates the table "employee" within company_db --
+-- Creates the table "employeesho" within company_db --
 CREATE TABLE employee (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
