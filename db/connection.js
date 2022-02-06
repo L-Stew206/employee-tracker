@@ -14,12 +14,12 @@ const connection = mysql.createConnection(
 
 connection.query = util.promisify(connection.query);
 
-connection.connect(function (err) {
-  if (err) {
-    throw err;
-  } else {
-    console.log("Sucessfully connected to mysql")
-  }
-});
+// connection.connect(function (err) {
+//   if (err) {
+//     throw err;
+//   } else {
+//     console.log("Sucessfully connected to mysql")
+//   }
+// });
 
 module.exports = connection; 

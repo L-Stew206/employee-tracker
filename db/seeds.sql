@@ -10,8 +10,8 @@ VALUES ("Head of Marketing", 120000, 4),
        ("Software Engineer", 130000, 1),
        ("Photographer", 90000, 3);
 
-INSERT INTO employee (first_name, last_name, role_id, manager_name)
-VALUES ("Chris", "Noll", 1, 3),
-       ("Caden", "Smith", 2, 2),
-       ("Vince", "White", 3, 4), 
-       ("Sophie", "Stewart", 4, 1);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Chris", "Noll", 1, NULL),
+       ("Caden", "Smith", 2, NULL),
+       ("Vince", "White", 3, NULL), 
+       ("Sophie", "Stewart", 4, NULL);
