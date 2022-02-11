@@ -17,7 +17,7 @@ const startQuestion = () => {
                     "View all Employees",
                     "Add a Department",
                     "Add a Role",
-                    "Add a Employee",
+                    "Add an Employee",
                     "Update a Employee role",
 
                 ],
@@ -109,16 +109,19 @@ async function addRole() {
 
     let departments = await db.query('SELECT * FROM departments;');
 
-    let departmentsArray = {};
+   // let departmentsArray = {};
 
-    departments.forEach(department => {
-        departmentsArray[department.department_name] = department.id;
-    });
+    // departments.forEach(department => {
+    //     departmentsArray[department.department_name] = department.id;
+    // });
 
     let departmentID = departments.map(department => {
-        return department.department_name;
-    })
-
+        return {
+            name: department.department_name,
+            value: department.id
+        }
+    });
+    
     inquirer
         .prompt([
             {
@@ -138,9 +141,11 @@ async function addRole() {
                 choices: departmentID
             },
         ])
-        .then (async (response)) => {
-            db.query ('INSERT INTO roles (job_title, salary, department_id) VALUES ("${job_title}", "${salary}", "${departmentArray[department_name]}")`);');
-
+        .then (async (response) => {
+            // Take the user's answers and go INSERT them into the 'role' table
+            db.query ('INSERT INTO roles (job_title, salary, department_id) VALUES (?,?,?)',
+            [response.role,response.salery,response.department_name],
+            
            (err, results) => {
                 if (err) {
                   console.log(err);
@@ -148,65 +153,41 @@ async function addRole() {
                   startQuestion();
                 }
               }
-            );
+            )
         });
     }
+            
         
     
 
     // SELECT the existing department put for the 'department' table
 
 
-    const departments = [
-        {
-            id: 1,
-            name: "Marketing",
-        },
-        {
-            id: 2,
-            name: "Finance",
-        },
-        {
-            id: 3,
-            name: "Human Resources",
-        },
-        {
-            id: 3,
-            name: "Sales",
-        },
-
-    ];
-    // .map() the results
-    const choices = department.map(department => {
-        return {
-            name: department.name,
-            value: department.id
-        }
-    })
-
-    // THEN promt the user for role information (inquirer)
-    const answers = await inquirer
-        .prompt([
-            {
-                type: "list",
-                name: "department_id",
-                message: " Choose a department",
-                choices: [
-                    { name: "Marketing", value: 1 },
-                    { name: "Finance", value: 2 },
-                    { name: "Human Resource", value: 3 },
-                    { name: "Sales", value: 4 },
-                ]
-            }
-        ])
-        .then((answers) => {
-            console.log(answers);
-        });
-}
-        // Take the user's answers and go INSERT them into the 'role' table
 
 // add an employee - CREATE - "INSERT" [table_name]
 async function addEmployee (){
+
+    try {
+
+    
+    let roles = await db.query('SELECT * FROM roles;');
+
+    let roleID = roles.map(role => {
+        return {
+            name: role.job_title,
+            value: role.id
+        }
+         });
+    let employees = await db.query('SELECT * FROM employee;');
+
+    let employeeID = employees.map(employee => {
+        return {
+            name: employee.first_name + " " + employee.last_name,
+            
+            value: employee.id
+        }  
+    });
+
     inquirer
     .prompt([
         {
@@ -232,8 +213,10 @@ async function addEmployee (){
             choices: employeeID,
           },
         ])
-        .then (async (response)) => {
-            db.query( 'INSERT INTO employee VALUES ("${first_name}", "${last_name}", "${roleID[job_title]}", "${departmentID[department_name]}", "${manager_name}");`);
+        .then (async (response) => {
+            console.log(response);
+            db.query( 'INSERT INTO employee (first_name,last_name,role_id,manager_id) VALUES (?,?,?,?)',
+            [response.firstname,response.lastname,response.role,response.manager],
             (err, results) => {
                 if (err) {
                   console.log(err);
@@ -241,8 +224,11 @@ async function addEmployee (){
                   startQuestion();
                 }
               }
-            );
+            )
           });
+        } catch (err) {
+            console.log(err)
+        }
       }
      
 
