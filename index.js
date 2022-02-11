@@ -3,8 +3,6 @@ const db = require('./db/connection');
 const table = require('console.table');
 const inquirer = require('inquirer')
 
-
-
 //Present user with question
 const startQuestion = () => {
     inquirer
@@ -45,6 +43,7 @@ const startQuestion = () => {
         });
 };
 
+// Connecting databases to mysql
 db.connect(function (err) {
     if (err) {
       throw err;
@@ -54,8 +53,6 @@ db.connect(function (err) {
     }
   });
 
-
-
 // View all departments - READ - "SELECT * FROM (table_name]";
 async function viewAllDepartments() {
     try {
@@ -64,21 +61,18 @@ async function viewAllDepartments() {
         console.table(departments);
         
     } catch (err) {
-        console.error(err);
+        //console.error(err);
     }
     startQuestion();
 };
 
 //view all roles - READ - "SELECT * FROM (table_name]";
 async function viewAllRoles() {
-    const roles = await db.query('SELECT * FROM roles')
-
-    console.table(roles);
+    const roles = await db.query('SELECT * FROM roles') // we know method works, so dont
+                                                        
+    console.table(roles);                               // need to have try { & catch {  
     startQuestion();
-
 }
-
-
 
 // view al employees - READ - "SELECT * FROM (table_name]";
 async function viewAllEmployee() {
@@ -87,25 +81,51 @@ async function viewAllEmployee() {
 
     console.table(employee);
     startQuestion();
-
-
 }
-
-
-// add a department - CREATE - "INSERT INTO [table_name]"
-async function addDepartment () {
+// Adds a new department to the department table
+function addDepartment() {
     inquirer
-    .prompt ([
+      .prompt([
         {
-                 name: "response",
-                type: "input",
-                message: "",
-        }
-    ])
-}
+          name: "department",
+          type: "input",
+          message: "Enter name of the new department:",
+        },
+      ])
+      .then((response) => {
+        const query = `INSERT INTO departments (department_name) VALUES (?)`;
+        db.query(query, response.department, (err, results) => {
+          if (err) {
+            console.log(err);
+          } else {
+            startQuestion();
+          }
+        });
+      });
+  }
 
 // add a role - CREATE - "INSERT [table_name] (col1, col2) VALUES (value, value2)""
-async function createRole() {
+async function addRole() {
+    
+    inquirer
+    .prompt([
+        {
+            name: "role",
+            type: "input",
+            message: "Enter the job title",
+        },
+        {
+            name: "salery",
+            type: "number",
+            message: "Enter the salery of the new rolw"
+        },
+        {
+            name: "department",
+            type: "list",
+            message: "Choose a department for this role",
+            choices: departmentArray
+        },
+    ])
 
     // SELECT the existing department put for the 'department' table
 
@@ -136,7 +156,6 @@ async function createRole() {
             value: department.id
         }
     })
-
 
 // THEN promt the user for role information (inquirer)
 const answers = await inquirer

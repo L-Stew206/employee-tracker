@@ -12,6 +12,7 @@ const connection = mysql.createConnection(
     database: 'employees_db'
   });
 
+//Allows query to be run asynchronously
 connection.query = util.promisify(connection.query);
 
 // connection.connect(function (err) {
