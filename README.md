@@ -49,10 +49,15 @@ WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the databa
 
 VIDEO LINK
-link https://drive.google.com/file/d/1pw5SWMsT9tE54D45LqpdjYwkeRogoYlN/view?usp=sharing
+link https://drive.google.com/file/d/1AD1GtczbbMUyLlLhtBBu5DnSN8VayGFC/view
 
 SCREENSHOTS
 
-link Screen Shot 2022-02-17 at 5.17.08 PM
-![text](assets/images/1st pic .png)
-![text](assets/images/2nd pic.png)
+![text](assets/1st.png)
+![text](assets/2nd.png)
+
+
+
+
+
+
