@@ -131,7 +131,7 @@ async function addRole() {
             {
                 name: "salery",
                 type: "number",
-                message: "Enter the salery of the new rolw"
+                message: "Enter the salery of the new role"
             },
             {
                 name: "department_name",

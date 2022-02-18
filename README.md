@@ -1,3 +1,35 @@
+EMPLOYEE TRACKER
+
+DESCRIPTION
+A command-line application to manage a company's employee database, using Node.js, Inquirer, and MySQL.
+
+INSTALLATION
+Download Node.js
+Download MYSQL
+Run Source for SCHEMA and SEEDS .SQL files
+Run "node index.js" in command line to start application
+
+USAGE
+View and interact with information stored in databases.
+
+CONTRIBUTING
+Luke Stewart
+
+GITHUB
+L-Stew206
+
+EMAIL
+lukeconrad.stew@gmail.com
+
+LICENSE
+None
+
+USER STORY
+AS A business owner
+I WANT to be able to view and manage the departments, roles, and employees in my company
+SO THAT I can organize and plan my business
+
+ACCEPTANCE CRITERIA
 GIVEN a command-line application that accepts user input
 WHEN I start the application
 THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
@@ -16,31 +48,11 @@ THEN I am prompted to enter the employee’s first name, last name, role, and ma
 WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the databa
 
+VIDEO LINK
+link https://drive.google.com/file/d/1pw5SWMsT9tE54D45LqpdjYwkeRogoYlN/view?usp=sharing
 
+SCREENSHOTS
 
-
-# employee-tracker
-
-// present user with options 
-
-// view all departments -  READ - "SELECT * FROM (table_name]";
-
-//view all roles -  READ - "SELECT * FROM (table_name]";
-
-// view al employees -  READ - "SELECT * FROM (table_name]";
-
-// add a department - CREATE - "INSERT INTO [table_name]"
-
-// add a role - CREATE - "INSERT [table_name] (col1, col2) VALUES (value, value2)""
-
-    // SELECT the existing roles put for the 'roles'table
-
-    //.map() the results from the 'roles' to question data for inquirer
-
-    // THEN promt the user for role information (inquirer)
-
-        // Take the user's answers and go INSERT them into the 'role' table
-
-// add an employee - CREATE - "INSERT" [table_name]
-
-//update an employee  
+link Screen Shot 2022-02-17 at 5.17.08 PM
+![text](assets/images/1st pic .png)
+![text](assets/images/2nd pic.png)
