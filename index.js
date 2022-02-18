@@ -231,13 +231,13 @@ async function addEmployee() {
 
 //update an employee 
 async function updateEmployee() {
-    console.log("helo")
+   // console.log("helo")
     try {
-        console.log("helo");
+        
 
     // Selects all employees
-    let employees = await db.query('SELECT first_name, last_name FROM employee;');
-
+    let employees = await db.query('SELECT first_name, last_name, id FROM employee;');
+        console.log("employees", employees)
     // Creates an array if employees to choose from 
     let employeeID = employees.map(employee => {
         return {
@@ -245,11 +245,10 @@ async function updateEmployee() {
 
             value: employee.id
         }
-        console.log("helo");
     });
 
     //  Selects all roles
-    let roles = await db.query('SELECT job_title, department_id FROM roles;');
+    let roles = await db.query('SELECT job_title, department_id, id FROM roles;');
 
     // Creats an array of roles to choose from
     let roleID = roles.map(role => {
@@ -280,17 +279,18 @@ async function updateEmployee() {
 
 
         .then(async (response) => {
-            var firstName = response.employee_firstName.split([1]);
-            db.query('UPDATE employee (first_name,last_name,role_id) VALUES (?,?,?)',
-                [response.employee_firstName, response.employee_lastName, response.new_role],
+          
+           
+           db.query('UPDATE employee SET role_id = ? WHERE id = ?',
+                [response.new_role, response.employee_firstName],
                 (err, results) => {
                     if (err) {
                         console.log(err);
                     } else {
                         startQuestion();
                     }
-                }
-            )
+                    
+                } )
         });
     } catch (err) {
     console.log(err)
